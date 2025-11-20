@@ -1,6 +1,6 @@
 @echo off
 echo ========================================
-echo   Fix et Push vers GitHub
+echo   Mise a jour GitHub
 echo ========================================
 echo.
 
@@ -14,7 +14,7 @@ if errorlevel 1 (
 
 echo.
 echo [2/3] Creation du commit...
-git commit -m "Fix TypeScript build error in Skills component"
+git commit -m "Clean up files and add contact form email functionality"
 if errorlevel 1 (
     echo Aucun changement a commiter ou erreur
 )
@@ -35,10 +35,11 @@ if errorlevel 1 (
 
 echo.
 echo ========================================
-echo   SUCCES! Corrections poussees
+echo   SUCCES! Mise a jour terminee
 echo ========================================
 echo.
-echo Vercel va redepoyer automatiquement!
+echo N'oubliez pas de configurer RESEND_API_KEY sur Vercel!
+echo Consultez SETUP_EMAIL.md pour les instructions
 echo.
 pause
 

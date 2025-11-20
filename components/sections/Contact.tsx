@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Send } from 'lucide-react';
+import { Mail, Linkedin, Send, Loader2 } from 'lucide-react';
 import Section, { SectionTitle } from '@/components/ui/Section';
 import { personalInfo } from '@/data/personal';
 
@@ -12,13 +12,48 @@ export default function Contact() {
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({
+    type: null,
+    message: '',
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder for form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you for your message! I will get back to you soon.',
+        });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.',
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'An error occurred. Please try again later.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -129,14 +164,35 @@ export default function Contact() {
                 placeholder="Your message..."
               />
             </div>
+            {submitStatus.type && (
+              <div
+                className={`p-4 rounded-lg ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-500/10 border border-green-500/50 text-green-400'
+                    : 'bg-red-500/10 border border-red-500/50 text-red-400'
+                }`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full px-6 py-3 bg-gradient-to-r from-accent-purple to-accent-pink text-white rounded-lg hover:opacity-90 transition-opacity font-medium flex items-center justify-center gap-2 shadow-lg shadow-accent-purple/30"
+              disabled={isSubmitting}
+              whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+              className="w-full px-6 py-3 bg-gradient-to-r from-accent-purple to-accent-pink text-white rounded-lg hover:opacity-90 transition-opacity font-medium flex items-center justify-center gap-2 shadow-lg shadow-accent-purple/30 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Send size={18} />
-              Send Message
+              {isSubmitting ? (
+                <>
+                  <Loader2 size={18} className="animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send size={18} />
+                  Send Message
+                </>
+              )}
             </motion.button>
           </motion.form>
         </div>

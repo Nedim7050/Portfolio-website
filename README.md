@@ -8,6 +8,7 @@ A modern, responsive portfolio website for an AI & Data Science Engineering Stud
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
+- **Email**: Resend API
 
 ## Getting Started
 
@@ -15,50 +16,31 @@ A modern, responsive portfolio website for an AI & Data Science Engineering Stud
 
 ```bash
 npm install
-# or
-yarn install
 ```
 
 ### Development
 
-Run the development server:
-
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
+
+### Environment Variables
+
+Create a `.env.local` file:
+
+```env
+RESEND_API_KEY=your_resend_api_key_here
+```
+
+Get your API key from [resend.com](https://resend.com)
 
 ### Build for Production
 
 ```bash
 npm run build
-# or
-yarn build
-```
-
-Then start the production server:
-
-```bash
 npm start
-# or
-yarn start
-```
-
-## Project Structure
-
-```
-├── app/                    # Next.js app directory
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Main page
-│   └── globals.css        # Global styles
-├── components/            # React components
-│   ├── sections/          # Section components
-│   └── ui/                # Reusable UI components
-├── data/                  # Data files (projects, skills, etc.)
-└── public/                # Static assets
 ```
 
 ## Features
@@ -67,6 +49,7 @@ yarn start
 - ✅ Smooth scroll navigation
 - ✅ Dark theme with modern UI
 - ✅ Animated sections with Framer Motion
+- ✅ Contact form with email functionality
 - ✅ SEO optimized
 - ✅ Accessible (WCAG compliant)
 
