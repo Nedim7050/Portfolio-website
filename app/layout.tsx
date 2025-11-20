@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   title: 'Nadim Mejri - AI & Data Science Engineering Student',
   description: 'Portfolio of Nadim Mejri, AI & Data Science Engineering Student seeking PFE internship (National or International)',
   keywords: ['AI', 'Data Science', 'Machine Learning', 'Engineering', 'Portfolio', 'PFE Internship'],
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

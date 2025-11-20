@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -48,9 +49,9 @@ export default function Navbar() {
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="text-2xl font-bold text-white hover:text-primary transition-colors"
+            className="flex items-center hover:opacity-80 transition-opacity"
           >
-            NM
+            <Logo size={40} />
           </a>
 
           {/* Desktop Navigation */}
