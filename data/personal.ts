@@ -6,6 +6,7 @@ export const personalInfo = {
   phone: "+216 29 654 583",
   github: "https://github.com/Nedim7050",
   linkedin: "https://www.linkedin.com/in/nadim-mejri-078515330",
+  portfolio: "https://portfolio-website-nadim-mejri.vercel.app",
 };
 
 
