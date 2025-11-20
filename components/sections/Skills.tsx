@@ -1,12 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Brain, Database, Code, Cloud, Terminal } from 'lucide-react';
+import { Brain, Database, Code, Cloud, Terminal, LucideIcon } from 'lucide-react';
 import Section, { SectionTitle } from '@/components/ui/Section';
 import SkillChip from '@/components/ui/SkillChip';
 import { skills } from '@/data/skills';
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+const iconMap: Record<string, LucideIcon> = {
   brain: Brain,
   database: Database,
   code: Code,
